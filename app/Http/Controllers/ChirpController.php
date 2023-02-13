@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Chirp;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ChirpController extends Controller
 {
@@ -15,8 +16,8 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        return view('chirps.index',[
-            'chirps' => Chirp::with('user')->latest()->get(),
+        return Inertia::render('Chirps/Index', [
+            'chirps' => Chirp::with('user:id,name')->latest()->get(),
         ]);
     }
 
